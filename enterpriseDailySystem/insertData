@@ -1,0 +1,99 @@
+ Employee.objects.create(employeeID=1,employeeName='jc',employeeSex='mal
+ e',employeeBirth='1990-01-01',employeePhone='13410014492',employeePlace
+ ='futian baoshuiqu',joinTime='2018-04-23',password='123456',isLead=True
+ )
+  Employee.objects.create(employeeID=1,employeeName='jc',employeeSex='mal
+ e',employeeBirth='1990-01-01',employeePhone='13410014492',employeePlace
+ ='futian baoshuiqu',joinTime='2018-04-23',password='123456',isLead=True
+ )
+
+
+
+
+
+
+
+
+
+
+
+
+
+class Mysqldb():
+    '''
+    classdocs
+    '''
+
+    def __init__(self):
+        '''
+        Constructor
+        '''
+
+    def getConn(self):
+        # 打开数据库连接
+        try:
+
+            # db=MySQLdb.connect(host="test.sinsinet.com",user="root",passwd="root",db="knyh",port=3317)
+            db = MySQLdb.connect(host="127.0.0.1", user="dev", passwd="123456", db="dailysystem", port=3306, charset='utf8')
+            return db
+            # 使用cursor()方法获取操作游标
+            # cursor=db.cursor()
+        except MySQLdb.Error, e:
+            print "Mysql Errot %d:%s" % (e.args[0], e.args[1])
+
+    def doQury(self, mysql):
+        try:
+            con = self.getConn()
+            cur = con.cursor()
+            cur.execute(mysql)
+            # 使用fetchone()方法获取一条数据库
+            data = cur.fetchall()
+            return data
+        except MySQLdb.Error, e:
+            print "Mysqldb Error:%s" % e
+        finally:
+            cur.close()
+            con.close()
+
+    def doInsert(self, mysql):
+        try:
+            con = self.getConn()
+            cur = con.cursor()
+            cur.execute(mysql)
+            con.commit()
+            return "insert ok"
+        except MySQLdb.Error, e:
+            con.rollback()
+            print "Mysqldb Error:%s" % e
+        finally:
+            cur.close()
+            con.close()
+
+    def doUpdate(self, mysql):
+        try:
+            con = self.getConn()
+            cur = con.cursor()
+            cur.execute(mysql)
+            con.commit()
+            return "update ok"
+        except MySQLdb.Error, e:
+            con.rollback()
+            print "Mysqldb Error:%s" % e
+        finally:
+            cur.close()
+            con.close()
+
+    def doDelete(self, mysql):
+        try:
+            con = self.getConn()
+            cur = con.cursor()
+            cur.execute(mysql)
+            con.commit()
+            return "delete ok"
+        except MySQLdb.Error, e:
+            con.rollback()
+            print "Mysqldb Error:%s" % e
+        finally:
+            cur.close()
+            con.close()
+

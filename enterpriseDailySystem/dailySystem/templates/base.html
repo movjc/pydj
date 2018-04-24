@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>企业日常事务管理系统-{%block title%}{%endblock%}</title>
+		<!--<link rel="stylesheet" type="text/css" href="../static/css/index.css"/>-->
+		{%load staticfiles%} <link rel="stylesheet" href=" {% static 'css/index.css' %}">
+	</head>
+	<body>
+		<header>
+			<div id="img"></div>
+		</header>
+		<nav id="menu">
+	       <a href="#">
+		       <span class="left"></span> 
+				首页 
+	       </a> 
+	       <a href="#">
+		        <span class="left"></span>
+		        消息列表 
+	       </a>
+	       <a href="#">
+		   		<span class="left"></span>
+				发布新消息 
+	       </a> 
+	       <a href="./login.html">
+				<span class="left"></span>
+		   		身份识别 
+	       </a> 
+    </nav>
+		{%block message%}
+		{%endblock%}
+    <section>
+    	<aside id="left">
+    		<div style="text-align: center;">
+    			<span>员工信息</span>
+    		</div>
+    		<div>
+    			
+    		</div>
+    	</aside>
+    	<aside id="right">
+    		<div>
+				{%block content%}
+				{%endblock%}
+			</div>
+    	</aside>
+    </section>
+    
+	</body>
+</html>

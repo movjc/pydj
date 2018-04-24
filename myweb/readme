@@ -1,0 +1,6 @@
+uperuser user:ray
+email:583496262@qq.com
+password:jin908834932
+
+
+启动服务命令 python manage.py runserver

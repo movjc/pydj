@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>学习django的模板</title>
+</head>
+<body>
+    <p>
+        欢迎学习django的模板知识！
+        <br />
+    </p>
+    <!--显示字符串在网页里面
+{{string}}
+
+教程列表：<br />
+{% for i in TutorialList %}
+{{ i }}
+    <br />
+{%  endfor %}
+
+
+站点：{{ info_dict.site }} 内容：{{ info_dict.content }}
+-->
+
+{% for item in List %}
+    {{ item }}{% if not forloop.last %},{% endif %}
+{% endfor %}
+
+{request.path}
+</body>
+</html>
