@@ -6,7 +6,7 @@ from django.core.urlresolvers import reverse
 
 
 class Employee(models.Model):
-    employeeID = models.CharField(primary_key=True,max_length=50)
+    employeeID = models.CharField(primary_key=True, max_length=50)
     employeeName = models.CharField(max_length=256)
     employeeSex = models.CharField(max_length=10)
     employeeBirth = models.DateField()
@@ -24,7 +24,7 @@ class Message(models.Model):
     messageID = models.IntegerField(auto_created=True, primary_key=True)
     messageTitle = models.CharField(max_length=256)
     messageContent = models.TextField()
-    employeeID = models.ForeignKey(Employee)
+    employee = models.ForeignKey(Employee)
     publishTime = models.DateTimeField()
 
     # def __unicode__(self):
