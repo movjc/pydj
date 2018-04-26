@@ -9,8 +9,8 @@
         {%for message in messages%}
         <li>
             <a href="">{{message.messageTitle}}</a>
-            <span>发布者：</span>
-            <span>发布时间：{{message.publishTime}}</span>
+            <span>发布者：{{message.employee}}</span>
+            <span>发布时间：{{message.publishTime|date:"Y-m-d H:i:s"}}</span>
         </li>
         {%endfor%}
     </ol>

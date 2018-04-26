@@ -55,3 +55,7 @@ def message_detail(request, pk):
     #     return redirect(message, permanent=True)
     return render(request, 'message.html', {'message': message})
 
+
+def messageAdd(request):
+
+
