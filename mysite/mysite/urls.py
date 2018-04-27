@@ -1,4 +1,4 @@
-"""enterpriseDailySystem URL Configuration
+"""mysite URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/1.11/topics/http/urls/
@@ -13,16 +13,10 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
-from django.conf.urls import url
+from django.conf.urls import url, include
 from django.contrib import admin
-from dailySystem import views
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^$', views.index, name='index'),
-    url(r'^index/$', views.index, name='index'),
-    url(r'^login/$', views.login, name='login'),
-    url(r'^message/(?P<pk>\d+)/$', views.message_detail, name='message_detail'),
-    url(r'^messageList/$', views.message_list, name='message_list'),
-    url(r'^messageAdd/$', views.message_add, name='message_add'),
+    url(r'^blog/', include('blog.urls', namespace='blog', app_name='blog')),
 ]

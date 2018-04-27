@@ -3,6 +3,7 @@ from __future__ import unicode_literals
 
 from django.db import models
 from django.core.urlresolvers import reverse
+from django.utils import timezone
 
 
 class Employee(models.Model):
@@ -25,13 +26,14 @@ class Message(models.Model):
     messageTitle = models.CharField(max_length=256)
     messageContent = models.TextField()
     employee = models.ForeignKey(Employee)
-    publishTime = models.DateTimeField()
+    publishTime = models.DateTimeField(default=timezone.now)
 
-    # def __unicode__(self):
-    #     return  self.employeeID  #,  self.messageTitle,
+    def __unicode__(self):
+        return self.messageTitle
 
-    # def get_absolute_url(self):
-    #     return reverse('message', args=(self.pk, self.messageID,))
+    def get_absolute_url(self):
+        #return reverse('message', args=(self.pk,))
+        return "/message/%i/" % self.messageID
 
 
 class Reply(models.Model):

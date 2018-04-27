@@ -15,15 +15,15 @@
 		       <span class="left"></span> 
 				首页 
 	       </a> 
-	       <a href="#">
+	       <a href="/messageList">
 		        <span class="left"></span>
 		        消息列表 
 	       </a>
-	       <a href="#">
+	       <a href="/messageAdd">
 		   		<span class="left"></span>
 				发布新消息 
 	       </a> 
-	       <a href="./login.html">
+	       <a href="/login">
 				<span class="left"></span>
 		   		身份识别 
 	       </a> 
@@ -36,12 +36,13 @@
     			<span>员工信息</span>
     		</div>
     		<div>
-    			
+				{%block left%}
+				{%endblock%}
     		</div>
     	</aside>
     	<aside id="right">
     		<div>
-				{%block content%}
+				{%block right%}
 				{%endblock%}
 			</div>
     	</aside>

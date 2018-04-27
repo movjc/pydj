@@ -6,8 +6,12 @@
 </head>
 <body>
     <form action="/messageAdd/" method="POST">
+        {% csrf_token %}
+
         消息标题：<input type="text" name="messageTitle"> <br /><br />
         消息内容：<textarea name="messageContent" id="" cols="30" rows="10"></textarea> <br /><br />
+
+
         <input type="submit" value="提交">
     </form>
 </body>

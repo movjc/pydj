@@ -5,7 +5,7 @@ from django.shortcuts import render
 from models import Employee, Message
 from django import forms
 from django.shortcuts import render, render_to_response
-from django.http import HttpResponse
+from django.http import HttpResponse,HttpResponseRedirect
 from django.views.decorators.csrf import csrf_exempt,csrf_protect
 from django.contrib import auth
 from django.shortcuts import redirect
@@ -30,7 +30,8 @@ def login(request):
             if employee:
                 #return redirect('index.html', permanent=True)
                 #return render_to_response('index.html', {'userform': userform})
-                return render(request, 'index.html')
+               # return render(request, 'index.html')
+                return HttpResponseRedirect('/index/')
             else:
                 return HttpResponse('用户名或密码错误，请重新输入')
     else:
@@ -41,21 +42,46 @@ def login(request):
 def index(request):
     # employees = Employee.objects.all()
     messages = Message.objects.all()
-    return render(request, 'index.html', {'messages': messages})
+    employee = Employee.objects.get(employeeID=2)
+    sex = str(employee.employeeSex)
+    return render(request, 'index.html', {'messages': messages, 'employee': employee, 'sex': sex})
 
 
 def message_list(request):
+    """获取消息列表"""
     messages = Message.objects.all()
     return render(request, 'messageList.html', {'messages': messages})
 
 
 def message_detail(request, pk):
+    """获取消息详情"""
     message = Message.objects.get(pk=pk)
     # if message_slug != message.messageID:
     #     return redirect(message, permanent=True)
     return render(request, 'message.html', {'message': message})
 
 
-def messageAdd(request):
+class MessageForm(forms.Form):
+    messageTitle = forms.CharField(label='消息标题', max_length=300)
+    messageContent = forms.CharField(label='消息内容', widget=forms.Textarea)
+
+
+@csrf_exempt
+def message_add(request):
+    if request.method == 'POST':
+        form = MessageForm(request.POST)
+        if form.is_valid():
+            title = form.cleaned_data['messageTitle']
+            content = form.cleaned_data['messageContent']
+            #print(Title, Content)
+            employeeid=1
+            Message.objects.create(messageTitle=title,messageContent=content,employee_id=employeeid)
+            return HttpResponseRedirect('/messageList/')
+    # messageTitle = request.POST['messageTitle']
+    # messageContent = request.POST['messageContent']
+    else:
+        form = MessageForm()
+
+    return render(request, 'messageAdd.html', {'form': form})
 
 
