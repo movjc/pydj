@@ -9,6 +9,7 @@ from django.http import HttpResponse,HttpResponseRedirect
 from django.views.decorators.csrf import csrf_exempt,csrf_protect
 from django.contrib import auth
 from django.shortcuts import redirect
+from django import template
 
 
 class UserForm(forms.Form):
@@ -83,5 +84,54 @@ def message_add(request):
         form = MessageForm()
 
     return render(request, 'messageAdd.html', {'form': form})
+
+
+ONE_PAGE_OF_DATA = 2
+
+
+def message_posts(request):
+    try:
+        curPage = int(request.GET.get('curPage', '1'))
+        allPage = int(request.GET.get('allPage', '1'))
+        pageType = str(request.GET.get('pageType', ''))
+    except ValueError:
+        curPage = 1
+        allPage = 1
+        pageType = ''
+
+    # 判断点击了【上一页】还是【下一页】
+    if pageType == 'pageDown':
+        curPage += 1
+    elif pageType == 'pageUp':
+        curPage -= 1
+
+    startPos = (curPage-1)*ONE_PAGE_OF_DATA
+    endPos = startPos + ONE_PAGE_OF_DATA
+    posts = Message.objects.all()[startPos:endPos]
+
+    if curPage == 1 and allPage ==1: # 标记1
+        allPostCounts = Message.objects.count()
+        allPage = allPostCounts / ONE_PAGE_OF_DATA
+        remainPost = allPostCounts % ONE_PAGE_OF_DATA
+        if remainPost > 0:
+            allPage += 1
+
+    return render(request, "messagePost.html", {'posts': posts, 'allPage': allPage, 'curPage': curPage})
+
+# 过滤器显示数据行号
+register = template.Library()
+
+
+@register.filter
+def multiply(value, num):
+    # 定义一个乘法过滤器
+    return (value-1)*num
+
+
+
+
+
+
+
 
 

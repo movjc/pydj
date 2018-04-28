@@ -12,5 +12,5 @@ def blog_title(request):
 
 def blog_detail(request, article_id):
     article = BlogArticles.objects.get(id=article_id)
-    print(article)
+    #print(article)
     return render(request, 'blog/detail.html', {'article': article})

@@ -28,6 +28,10 @@ class Message(models.Model):
     employee = models.ForeignKey(Employee)
     publishTime = models.DateTimeField(default=timezone.now)
 
+    class Meta:
+        ordering = ("-publishTime",)
+
+
     def __unicode__(self):
         return self.messageTitle
 
