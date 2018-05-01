@@ -1,0 +1,9 @@
+{%extends "base.html"%}
+{%block title%}Logout {%endblock%}
+
+{%block content%}
+<div class="row text-center vertical-middles-sm">
+    <p>登出成功</p>
+    <P>你可以从新登录 <a href="{%url 'account:user_login'%}">重新登录</a></P>
+</div>
+{%endblock%}

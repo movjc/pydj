@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}regsiter user{% endblock %}
+{% block content %}
+    <div class="row text-center vertical-middle-sm">
+        <h1>register</h1>
+        <p>
+            you are a user,
+            <strong>
+                <a href="{% url 'account:user_login' %}">Login</a>
+            </strong>
+            ,please
+        </p>
+        <P>or register</P>
+        <form action="." class="form-horizontal" method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="{{form.username.id_for_label}}" class="col-md-5 control-label">Username</label>
+                <div class="col-md-6 text-left">{{form.username}}</div>
+            </div>
+            <div class="form-group">
+                <label for="{{form.email.id_for_label}}" class="col-md-5 control-label">Email</label>
+                <div class="col-md-6 text-left">{{form.email}}</div>
+            </div>
+            <div class="form-group">
+                <label for="{{form.password.id_for_label}}" class="col-md-5 control-label">Password</label>
+                <div class="col-md-6 text-left">{{form.password}}</div>
+            </div>
+            <div class="form-group">
+                <label for="{{form.password.id_for_label}}" class="col-md-5 control-label">Confirm Password</label>
+                <div class="col-md-6 text-left">{{form.password2}}</div>
+            </div>
+            <input type="submit" class="btn btn-primary btn-lg" value="Register">
+        </form>
+    </div>
+{% endblock %}

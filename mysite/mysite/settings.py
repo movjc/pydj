@@ -123,10 +123,14 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+
 STATICFIFLES_DIRS = [
     os.path.join(BASE_DIR, "static"),
 ]
 STATICFILES_FINDERS = (
     "django.contrib.staticfiles.finders.FileSystemFinder",
-    "django.contrib.staticfiles.finders.AppDirectoriesFinder"
+    "django.contrib.staticfiles.finders.AppDirectoriesFinder",
 )
+
+
+LOGIN_REDIRECT_URL = '/blog/'
