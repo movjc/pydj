@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'blog',
     'account',
+    'article',
 ]
 
 MIDDLEWARE = [
@@ -122,15 +123,23 @@ USE_TZ = True
 
 
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
-
-STATICFIFLES_DIRS = [
-    os.path.join(BASE_DIR, "static"),
-]
-STATICFILES_FINDERS = (
-    "django.contrib.staticfiles.finders.FileSystemFinder",
-    "django.contrib.staticfiles.finders.AppDirectoriesFinder",
-)
+# STATICFIFLES_DIRS = [
+#     os.path.join(BASE_DIR, "static"),
+# ]
+# STATICFILES_FINDERS = (
+#     "django.contrib.staticfiles.finders.FileSystemFinder",
+#     "django.contrib.staticfiles.finders.AppDirectoriesFinder",
+# )
 
 
 LOGIN_REDIRECT_URL = '/blog/'
+
+
+EMAIL_HOST = 'smtp.163.com'
+EMAIL_HOST_USER = 'jin152110@163.com'
+EMAIL_HOST_PASSWORD = 'jin583496262'
+EMAIL_PORT = 25
+EMAIL_USE_TLS = True
+DEFAULT_FROM_EMAIL = 'jin152110@163.com'
