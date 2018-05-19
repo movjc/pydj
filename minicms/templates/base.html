@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+{% load static %}
 <html>
   <head>
     <meta charset="utf-8">
@@ -7,13 +8,16 @@
     <title>{% block title %}欢迎光临{% endblock title %} - 自强学堂</title>
 
     <!-- Bootstrap -->
-    <link href="http://apps.bdimg.com/libs/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <!--<link href="http://apps.bdimg.com/libs/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet">-->
+      <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
 
     <!-- 引入下面两个库让 IE8 支持 HTML5 元素 -->
     <!-- 警告: Respond.js 通过 file:// 浏览的时候不能正常工作！-->
     <!--[if lt IE 9]>
-      <script src="http://apps.bdimg.com/libs/html5shiv/3.7/html5shiv.min.js"></script>
-      <script src="http://apps.bdimg.com/libs/respond.js/1.4.2/respond.min.js"></script>
+      <!--<script src="http://apps.bdimg.com/libs/html5shiv/3.7/html5shiv.min.js"></script>-->
+      <!--<script src="http://apps.bdimg.com/libs/respond.js/1.4.2/respond.min.js"></script>-->
+      <script src="{% static 'js/bootstrap.js' %}"></script>
+      <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
     <![endif]-->
     <style type="text/css">
     body {
@@ -43,6 +47,9 @@
 
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav">
+            <p>
+                <img src="{% static 'img/logo.png' %}" alt="">
+            </p>
           {% for column in nav_display_columns %}
               <li><a href="{{ column.get_absolute_url }}">{{ column.name }}</a></li>
           {% endfor %}
@@ -70,17 +77,17 @@
          自强学堂为非盈利站点，提供的内容仅用于学习和培训，我们不能保证内容一定正确。通过使用本站进行学习随之而来的风险与本站无关。当使用本站时，代表您已接受了本站的使用条款和隐私条款。 版权所有，保留一切权利。自强学堂的所有内容仅供测试，是以学习知识和分享知识为目的，对任何法律问题及风险不承担任何责任。
         </div>
         <div style="padding-top:10px; text-align: center">
-          自强学堂是用<a href="https://www.djangoproject.com/" target="_blank" rel="nofollow">Django</a>技术开发的站点，托管在<a href="http://bce.baidu.com/" target="_blank" rel="nofollow">百度开放云</a>平台<br>
+          <!--自强学堂是用<a href="https://www.djangoproject.com/" target="_blank" rel="nofollow">Django</a>技术开发的站点，托管在<a href="http://bce.baidu.com/" target="_blank" rel="nofollow">百度开放云</a>平台<br>-->
 
           Copyright &copy; 2014 Powered by 自强学堂 All Rights Reserved.
-         <a href="http://www.miitbeian.gov.cn/" rel="nofollow" target="_blank">吉ICP备13002477号-1</a>
+         <!--<a href="http://www.miitbeian.gov.cn/" rel="nofollow" target="_blank">吉ICP备13002477号-1</a>-->
         </div>
        </div>
       </div>
     </div>
 
-    <script src="http://apps.bdimg.com/libs/jquery/1.11.1/jquery.min.js"></script>
-    <script src="http://apps.bdimg.com/libs/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+    <!--<script src="http://apps.bdimg.com/libs/jquery/1.11.1/jquery.min.js"></script>-->
+    <!--<script src="http://apps.bdimg.com/libs/bootstrap/3.3.0/js/bootstrap.min.js"></script>-->
     {% include "baidutongji.html" %}
   </body>
 </html>

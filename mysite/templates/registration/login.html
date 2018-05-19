@@ -8,12 +8,6 @@
 
 <div class="row text-center vertical-middle-sm" >
     <h1>Login</h1>
-    <p>
-        <strong>
-            <a href="{% url 'account:user_register' %}">Register</a>
-        </strong>
-    </p>
-
         <br />
     <form class="form-horizontal" action="{%url 'account:user_login'%}" method="POST">
         {% csrf_token %}
@@ -32,5 +26,9 @@
         </div>
         <input type="submit" class="btn btn-primary btn-lg" value="Login">
     </form>
+    
+    <p style="margin-top:10px">Forgot your password? <a href="{% url 'account:password_reset' %}">reset password</a></p>
+    <br />
+    <p style="margin-top:10px">  If you had not a username, <a href="{% url 'account:user_register' %}">Register</a> Register to be a user</p>
 </div>
 {%endblock%}

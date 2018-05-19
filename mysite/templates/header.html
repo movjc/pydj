@@ -1,10 +1,11 @@
-{%load static %}
+
+{% load static %}
 <div class="container">
 
     <nav class="navbar navbar-default" role="navigation">
         <div class="navbar-header">
             <a href="#" class="navbar-brand">
-                <img src="{%static 'images/logo.png'%}" width="100px" height="100px" alt="">
+                <img src="{% static 'img/logo.png' %}" width="100px" height="100px" alt="">
             </a>
         </div>
         <div>
@@ -15,13 +16,26 @@
             </ul>
             <ul class="nav navbar-nav navbar-right" style="margin-right:10px">
                 {% if user.is_authenticated%}
-                    <li><a href="#">{{user.username}}</a></li>
+                    <li>
+                        <div class="dropdown" style="margin-top:8px">
+                            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu" data-toggle="dropdown">
+                                {{ user.username }}
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><a href="{% url 'account:password_change' %}">修改密码</a></li>
+                                <li><a href="{% url 'account:my_information' %}">个人中心</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    <!--<li><a href="#">{{user.username}}</a></li>-->
                     <li><a href="{%url 'account:user_logout'%}">Logout</a></li>
                 {%else%}
                      <li>
                         <a href="{% url 'account:user_login' %}">LOGIN</a>
                     </li>
                     <li>
+
                         <a href="{% url 'account:user_register' %}">Register</a>
                     </li>
                 {%endif%}
@@ -29,3 +43,9 @@
         </div>
     </nav>
 </div>
+<!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+<script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
+<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<!--<script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>-->
+<!--<script src="{% static 'js/bootstrap.min.js' %}"></script>-->

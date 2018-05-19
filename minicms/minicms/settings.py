@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'news',
     'DjangoUeditor',
+    'learnstatic',
 ]
 
 MIDDLEWARE = [
@@ -122,7 +123,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
-STATICFILES_DIRS = (os.path.join(BASE_DIR, "common_static"), )
+# STATICFILES_DIRS = (os.path.join(BASE_DIR, "common_static"), )
 
 #upload folder
 MEDIA_URL = '/media/'
