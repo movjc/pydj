@@ -5,23 +5,26 @@
 
 
 {%block left%}
-<ul>
-    <li>员工编号：{{employee.employeeID}}</li>
-    <li>员工姓名：{{employee.employeeName}}</li>
-    {%if sex == 'male'%}
-        <li>员工性别：男</li>
-    {%else%}
-        <li>员工性别：女</li>
-    {%endif%}
-    <li>出生年月：{{employee.employeeBirth|date:"Y-m-d"}}</li>
-    <li>办公室电话：{{employee.employeePhone}}</li>
-    <li>住址：{{employee.employeePlace}}</li>
-    {%if employee.isLead == True%}
-        <li>管理层领导:是</li>
-    {%else%}
-        <li>管理层领导:不是</li>
-    {%endif%}
-</ul>
+<div class="container">
+    <div class="page-header">员工信息</div>
+</div>
+<!--<ul>-->
+    <!--<li>员工编号：{{employee.employeeID}}</li>-->
+    <!--<li>员工姓名：{{employee.employeeName}}</li>-->
+    <!--{%if sex == 'male'%}-->
+        <!--<li>员工性别：男</li>-->
+    <!--{%else%}-->
+        <!--<li>员工性别：女</li>-->
+    <!--{%endif%}-->
+    <!--<li>出生年月：{{employee.employeeBirth|date:"Y-m-d"}}</li>-->
+    <!--<li>办公室电话：{{employee.employeePhone}}</li>-->
+    <!--<li>住址：{{employee.employeePlace}}</li>-->
+    <!--{%if employee.isLead == True%}-->
+        <!--<li>管理层领导:是</li>-->
+    <!--{%else%}-->
+        <!--<li>管理层领导:不是</li>-->
+    <!--{%endif%}-->
+<!--</ul>-->
 {%endblock%}
 
 {% block right %}

@@ -76,7 +76,7 @@ def message_add(request):
             content = form.cleaned_data['messageContent']
             #print(Title, Content)
             employeeid=1
-            Message.objects.create(messageTitle=title,messageContent=content,employee_id=employeeid)
+            Message.objects.create(messageTitle=title, messageContent=content, employee_id=employeeid)
             return HttpResponseRedirect('/messageList/')
     # messageTitle = request.POST['messageTitle']
     # messageContent = request.POST['messageContent']
