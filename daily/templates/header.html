@@ -1,0 +1,28 @@
+{% load static %}
+
+
+<div class="container">
+    <div>
+    <img src="{% static 'img/bg.png' %}" class="img-responsive" alt="首页图片" >
+    </div>
+    <nav class="navbar navbar-default" role="navigation">
+        <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">企业事务管理系统</a>
+        </div>
+        <div>
+            <ul class="nav nav-tabs  pull-right">
+                <li><a href="{% url 'dailySystem:index' %}">首页</a></li>
+                <li><a href="{% url 'dailySystem:message_list' %}">消息列表</a></li>
+                <li><a href="{% url 'dailySystem:message_add' %}">发布新消息</a></li>
+                {% if user.is_authenticated %}
+                <li><a href="#">{{ user.username }}</a></li>
+                <li><a href="{% url 'dailySystem:user_logout' %}">退出</a></li>
+                {% else %}
+                <li><a href="{% url 'dailySystem:user_login' %}">登录</a></li>
+                {% endif %}
+            </ul>
+        </div>
+        </div>
+    </nav>
+</div>

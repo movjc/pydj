@@ -1,0 +1,25 @@
+{%extends "base.html"%}
+{%block title%}消息详情{%endblock%}
+
+{% block content %}
+      <div class="container">
+            <div class="row">
+        <ol class="breadcrumb">
+            <li><a href="{% url 'dailySystem:index' %}">首页</a></li>
+            <li><a href="{% url 'dailySystem:message_list' %}">消息列表</a></li>
+            <li class="active">消息详情</li>
+        </ol>
+    </div>
+    </div>
+
+    <ul>
+        <li style="list-style-type:none;" class="text-center">{{message.messageTitle}}</li>
+        <li style="list-style-type:none;"  class="text-center">{{message.messageContent}}</li>
+    </ul>
+    <div class="row">
+        <div class="col-md-4 col-md-offset-8">
+            <p>发布人：{{user}} 发布时间：{{message.publishTime | date:"Y-m-d h:m:s"}}</p>
+
+        </div>
+    </div>
+{% endblock %}

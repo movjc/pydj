@@ -1,0 +1,32 @@
+{%extends "base.html"%}
+{%load static %}
+{%block title%}首页{%endblock%}
+
+{% block content %}
+    <div class="col-md-4">
+        {% if user.is_authenticated %}
+            <div class="list-group">
+                <h4 class="list-group-item-heading pull-center">员工信息</h4>
+                <li class="list-group-item">员工编号：{{user.id}}</li>
+                <li class="list-group-item">员工姓名：{{user.username}}</li>
+                <li class="list-group-item">员工性别：{{user.employee.employeeSex}}</li>
+                <li class="list-group-item">出生年月：{{user.employee.employeeBirth | date:"Y-m-d"}}</li>
+                <li class="list-group-item">办公室电话：{{user.employee.employeePhone}}</li>
+                <li class="list-group-item">住址：{{user.employee.employeePlace}}</li>
+                <li class="list-group-item">管理层领导：{{user.employee.isLead}}</li>
+            </div>
+        {% else %}
+            <p>还没登录，请登录</p>
+        {% endif %}
+    </div>
+    <div class="col-md-8">
+        <div class="row">
+            <ul class="list-group">
+                <h4 class="list-group-item-heading">最新消息</h4>
+                {% for message in messages %}
+                    <li class="list-group-item"> <a href="{{ message.get_absolute_url }}">{{message.messageTitle}}</a></li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+{% endblock %}

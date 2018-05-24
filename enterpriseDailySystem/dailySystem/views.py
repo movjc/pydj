@@ -3,18 +3,14 @@ from __future__ import unicode_literals
 
 from django.shortcuts import render
 from models import Employee, Message
-from django import forms
 from django.shortcuts import render, render_to_response
-from django.http import HttpResponse,HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect
 from django.views.decorators.csrf import csrf_exempt,csrf_protect
 from django.contrib import auth
 from django.shortcuts import redirect
 from django import template
-
-
-class UserForm(forms.Form):
-    employeeID = forms.CharField(label='员工号', max_length=50)
-    password = forms.CharField(label='密码', widget=forms.PasswordInput())
+from .forms import UserForm, MessageForm
+from django.contrib.auth.decorators import login_required
 
 
 @csrf_exempt
@@ -48,12 +44,13 @@ def index(request):
     return render(request, 'index.html', {'messages': messages, 'employee': employee, 'sex': sex})
 
 
+@login_required(login_url='login')
 def message_list(request):
     """获取消息列表"""
     messages = Message.objects.all()
     return render(request, 'messageList.html', {'messages': messages})
 
-
+@login_required(login_url='login')
 def message_detail(request, pk):
     """获取消息详情"""
     message = Message.objects.get(pk=pk)
@@ -62,12 +59,10 @@ def message_detail(request, pk):
     return render(request, 'message.html', {'message': message})
 
 
-class MessageForm(forms.Form):
-    messageTitle = forms.CharField(label='消息标题', max_length=300)
-    messageContent = forms.CharField(label='消息内容', widget=forms.Textarea)
 
 
 @csrf_exempt
+@login_required(login_url='login')
 def message_add(request):
     if request.method == 'POST':
         form = MessageForm(request.POST)
@@ -88,7 +83,7 @@ def message_add(request):
 
 ONE_PAGE_OF_DATA = 2
 
-
+@login_required(login_url='login')
 def message_posts(request):
     try:
         curPage = int(request.GET.get('curPage', '1'))
