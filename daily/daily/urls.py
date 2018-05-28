@@ -16,13 +16,11 @@ Including another URLconf
 from django.conf.urls import url, include
 from django.contrib import admin
 from django.conf import settings
-from DjangoUeditor import urls as DjangoUeditor_urls
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^dailySystem/', include('dailySystem.urls', namespace='dailySystem', app_name='dailySystem')),
-    url(r'^ueditor/', include('DjangoUeditor.urls' )),
+    url(r'^ckeditor/', include('ckeditor_uploader.urls')),
 ]
-
 
 if settings.DEBUG:
     from django.conf.urls.static import static

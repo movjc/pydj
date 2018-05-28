@@ -8,17 +8,18 @@ from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt,csrf_protect
 from .forms import SendMessageForm
 from django.http import HttpResponse, HttpResponseRedirect
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 def index(request):
     messages = Message.objects.all()[:5]
     return render(request, 'index.html', {'messages': messages})
 
 
-@login_required(login_url='/dailySystem/login')
-def message_list(request):
-    """获取消息列表"""
-    messages = Message.objects.all()
-    return render(request, 'messageList.html', {'messages': messages})
+# @login_required(login_url='/dailySystem/login')
+# # def message_list(request):
+# #     """获取消息列表"""
+# #     messages = Message.objects.all()
+# #     return render(request, 'messageList.html', {'messages': messages})
 
 
 @login_required(login_url='/dailySystem/login')
@@ -37,13 +38,28 @@ def message_add(request):
         if form.is_valid():
             title = form.cleaned_data['title']
             content = form.cleaned_data['content']
-            #print(Title, Content)
             user = User.objects.get(username=request.user.username)
             Message.objects.create(messageTitle=title, messageContent=content, employee_id=user.id)
             return HttpResponseRedirect('/dailySystem/messageList/')
-    # messageTitle = request.POST['messageTitle']
-    # messageContent = request.POST['messageContent']
     else:
         form = SendMessageForm()
 
     return render(request, 'messageAdd.html', {'form': form})
+
+
+@login_required(login_url='/dailySystem/login')
+def message_list(request):
+    limit = 5  # 每页显示记录数
+    messages = Message.objects.all()
+    paginator = Paginator(messages, limit)  # 实例化分页对象
+
+    page = request.GET.get('page')  # 获取页码
+
+    try:
+        messages = paginator.page(page)  # 获取某页对应的记录
+    except PageNotAnInteger:  # 如果页码不是整数
+        messages = paginator.page(1)  # 获取第一页的记录
+    except EmptyPage:  # 如果页码太大，没有相应的记录
+        messages = paginator.page(paginator.num_pages)  # 获取最后一页数据
+    print(messages)
+    return render(request, 'messageList.html', {'messages': messages})

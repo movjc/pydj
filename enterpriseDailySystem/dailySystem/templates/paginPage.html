@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+    <title>自带分页</title>
+</head>
+<body>
+<div class="container">
+
+
+    {% for message in messages %}
+    <p><a href="{{ message.get_absolute_url }}">{{message.messageTitle}}</a></p>
+    {% endfor %}
+
+
+      {# topics.paginator.page_range 这个函数返回包含一个所有页码数的 range 对象 #}
+      {# 即 range(1, topics.paginator.num_pages + 1) #}
+    <ul class="pagination">
+        {% if messages.has_previous %}
+           <li><a href="?page={{ messages.previous_page_number }}">&laquo;</a></li>
+        {% endif %}
+        {% for page_number in messages.paginator.page_range %}
+            {% ifequal page_number  messages.number %}
+                <li><a href="?page={{ page_number }}">{{ page_number }}</a></li>
+
+            {% else %}
+                <li><a href="?page={{ page_number }}">{{ page_number }}</a></li>
+            {% endifequal %}
+        {% endfor %}
+        {% if messages.has_next %}
+           <li><a href="?page={{ messages.next_page_number }}">&raquo;</a></li>
+        {% endif %}
+            <li><a>[第{{ messages.number }}/{{ messages.paginator.num_pages }}页]</a></li>
+    </ul>
+</div>
+</body>
+</html>

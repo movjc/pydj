@@ -10,11 +10,13 @@
     <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
+{% include 'article/header.html' %}
     <div class="containter">
-        {% include 'article/header.html' %}
+
         <div class="col-md-2">
             {% include 'article/leftslider.html' %}
         </div>
+
         <div class="col-md-10">
             {% block content %}
             {% endblock %}

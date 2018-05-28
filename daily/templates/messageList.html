@@ -1,22 +1,42 @@
 {%extends "base.html"%}
 {%block title%}消息列表{%endblock%}
 {% block content %}
-    <div class="container">
-        <div class="row">
-            <ol class="breadcrumb">
-                <li><a href="{% url 'dailySystem:index' %}">首页</a></li>
-                <li class="active">消息列表</li>
-            </ol>
+
+    <div class="row">
+        <ol class="breadcrumb">
+            <li><a href="{% url 'dailySystem:index' %}">首页</a></li>
+            <li class="active">消息列表</li>
+        </ol>
+    </div>
+    <div class="row">
+        <ol>
+            {%for message in messages%}
+            <li>
+                <a href="{{ message.get_absolute_url }}" class="pull-left">{{message.messageTitle}}</a>
+                <span class="pull-right">发布者：{{message.employee}} 发布时间：{{message.publishTime|date:"Y-m-d H:i:s"}}</span>
+            </li>
+            {%endfor%}
+        </ol>
+    </div>
+    <div class="row">
+        <div class="text-center">
+        <ul class="pagination">
+            {% if messages.has_previous %}
+               <li><a href="?page={{ messages.previous_page_number }}">&laquo;</a></li>
+            {% endif %}
+            {% for page_number in messages.paginator.page_range %}
+                {% ifequal page_number  messages.number %}
+                    <li><a href="?page={{ page_number }}">{{ page_number }}</a></li>
+
+                {% else %}
+                    <li><a href="?page={{ page_number }}">{{ page_number }}</a></li>
+                {% endifequal %}
+            {% endfor %}
+            {% if messages.has_next %}
+               <li><a href="?page={{ messages.next_page_number }}">&raquo;</a></li>
+            {% endif %}
+                <li><a>[第{{ messages.number }}/{{ messages.paginator.num_pages }}页]</a></li>
+        </ul>
         </div>
     </div>
-
-    <ol>
-        {%for message in messages%}
-        <li>
-            <a href="{{ message.get_absolute_url }}" class="pull-left">{{message.messageTitle}}</a>
-            <span class="pull-right">发布者：{{message.employee}} 发布时间：{{message.publishTime|date:"Y-m-d H:i:s"}}</span>
-        </li>
-        {%endfor%}
-    </ol>
-
 {% endblock %}

@@ -26,4 +26,6 @@ urlpatterns = [
     url(r'^messageList/$', views.message_list, name='message_list'),
     url(r'^messageAdd/$', views.message_add, name='message_add'),
     url(r'^messagePost/$', views.message_posts, name='message_posts'),
+    url(r'^messagePage/$', views.pag_post, name='pag_post'),
+    url(r'^paginPage/$', views.pagin_post, name='pagin_post'),
 ]

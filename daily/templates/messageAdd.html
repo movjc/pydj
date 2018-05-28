@@ -1,5 +1,7 @@
-{%extends "base.html"%}
-{%block title%}发布消息{%endblock%}
+{% extends "base.html" %}
+{% load static %}
+{% block title %}发布消息{% endblock %}
+<!--<script src="{% static 'ckeditor/static/ckeditor/ckeditor/ckeditor.js' %}" ></script>-->
 {% block content %}
     <div class="container">
         <div class="row">
@@ -19,8 +21,9 @@
         </div>
         <div class="form-group">
             <label for="name">消息内容</label>
-            <textarea name="content" class="form-control" rows="8"></textarea>
+            {{message.messageContent | safe}}
+            <textarea name="content" class="form-control ckeditor" rows="8"></textarea>
         </div>
-        <input type="submit" value="提交">
+        <input class="btn btn-primary" type="submit" value="提交">
     </form>
 {% endblock %}

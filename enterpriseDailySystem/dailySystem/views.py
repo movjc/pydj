@@ -11,8 +11,8 @@ from django.shortcuts import redirect
 from django import template
 from .forms import UserForm, MessageForm
 from django.contrib.auth.decorators import login_required
-
-
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from .Pagination import Pagination
 @csrf_exempt
 def login(request):
     if request.method == 'POST':
@@ -81,9 +81,10 @@ def message_add(request):
     return render(request, 'messageAdd.html', {'form': form})
 
 
-ONE_PAGE_OF_DATA = 2
+ONE_PAGE_OF_DATA = 5
 
-@login_required(login_url='login')
+'''这种翻页显示的内容有问题，只有下一页和上一页，太死板了'''
+# @login_required(login_url='login')
 def message_posts(request):
     try:
         curPage = int(request.GET.get('curPage', '1'))
@@ -122,11 +123,41 @@ def multiply(value, num):
     # 定义一个乘法过滤器
     return (value-1)*num
 
+"""这种翻页内容没获取到--失败了"""
+def pag_post(request):
+    try:
+        cur_page = int(request.GET.get('cur_page', '1'))
+    except ValueError:
+        cur_page = 1
+
+    pagination = Pagination.create_pagination(
+        from_name='dailySystem.models',
+        model_name='Message',
+        cur_page=cur_page,
+        start_page_omit_symbol='...',
+        end_page_omit_symbol='...',
+        one_page_data_size=1,
+        show_page_item_len=5)
+    qdata = pagination['objs']
+    print(qdata.messageTitle)
+    return render(request, 'messagePage.html', {'pagination': pagination})
 
 
+"""django 自带分页 Paginator"""
 
 
+def pagin_post(request):
+    limit = 3  # 每页显示记录数
+    messages = Message.objects.all()
+    paginator = Paginator(messages, limit)  # 实例化分页对象
 
+    page = request.GET.get('page')  # 获取页码
 
-
-
+    try:
+        messages = paginator.page(page)  # 获取某页对应的记录
+    except PageNotAnInteger:  # 如果页码不是整数
+        messages = paginator.page(1)  # 获取第一页的记录
+    except EmptyPage:  # 如果页码太大，没有相应的记录
+        messages = paginator.page(paginator.num_pages)  # 获取最后一页数据
+    print(messages)
+    return render(request, 'paginPage.html', {'messages': messages})

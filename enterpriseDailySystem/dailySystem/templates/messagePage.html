@@ -1,0 +1,40 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+
+        <ul>
+            {% for pagination in pagination %}
+            <li>{{forloop.counter}}
+                <a href="{{ pagination.get_absolute_url }}">
+                    {{pagination}}
+                </a>
+            </li>
+            {% endfor%}
+        </ul>
+
+<nav aria-label="Page navigation">
+  <ul class="pagination">
+   {% if pagination.cur_page != 1 %}
+    <li><a href="?cur_page=1"><<</a></li>
+    <li>
+      <a href="?cur_page={{ pagination.pre_page }}" aria-label="Previous">
+        <span aria-hidden="true">«</span>
+      </a>
+    </li>
+   {% endif %}
+   {% for page_item in pagination.page_items %}
+    {% if page_item == pagination.cur_page %}
+        <li><a href="?cur_page={{ page_item }}">{{ page_item }}</a></li>
+    {% else %}
+        <li><a href="?cur_page={{ page_item }}">{{ page_item }}</a></li>
+    {% endif %}
+   {% endfor%}
+   {% if pagination.cur_page != pagination.all_page %}
+    <li>
+      <a href="?cur_page={{ pagination.next_page }}" aria-label="Next">
+        <span aria-hidden="true">»</span>
+      </a>
+    </li>
+    <li><a href="?cur_page={{ pagination.all_page }}">>></a></li>
+   {% endif %}
+  </ul>
+</nav>

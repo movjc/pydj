@@ -4,7 +4,7 @@ from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
-from DjangoUeditor.models import UEditorField
+from ckeditor.fields import RichTextField
 
 
 class Employee(models.Model):
@@ -26,9 +26,7 @@ class Message(models.Model):
     # messageID = models.IntegerField(auto_created=True, primary_key=True)
     messageTitle = models.CharField(max_length=256)
     # messageContent = models.TextField()
-    messageContent = UEditorField('内容', height=300, width=1000,
-        default=u'', blank=True, imagePath="uploads/images/",
-        toolbars='besttome', filePath='uploads/files/')
+    messageContent = RichTextField(config_name='default')
     employee = models.ForeignKey(Employee)
     publishTime = models.DateTimeField(auto_now_add=True)
 

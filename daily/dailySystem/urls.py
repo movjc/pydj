@@ -9,6 +9,7 @@ urlpatterns = [
     url(r'^login/$', auth_views.login, name='user_login'),
     url(r'^logout/$', auth_views.logout, {"template_name": "index.html"}, name='user_logout'),
     url(r'^message/(?P<pk>\d+)/$', views.message_detail, name='message_detail'),
+    # url(r'^messageList/$', views.message_list, name='message_list'),
     url(r'^messageList/$', views.message_list, name='message_list'),
     url(r'^messageAdd/$', views.message_add, name='message_add'),
 ]
