@@ -62,7 +62,7 @@ article column
             success:function(e){
                 if(e=="1"){
                     layer.msg("successful");
-                    parent.location.reload();
+                    location.href = "{% url 'article:article_list' %}";
                 }else if(e=="2"){
                     layer.msg("sorry");
                 }else{
@@ -74,11 +74,13 @@ article column
 
     $(function(){
         var editor = editormd("editormd",{
-            width:"100%",
+            width:"90%",
             height:"640px",
             syncScrolling:"single",
             path:"{% static 'editor/lib/' %}"
         });
     });
+
+
 </script>
 {% endblock %}

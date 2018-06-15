@@ -4,14 +4,17 @@
 
     <nav class="navbar navbar-default" role="navigation">
         <div class="navbar-header">
-            <a href="#" class="navbar-brand">
-                <img src="{% static 'img/logo.png' %}" width="100px" height="100px" alt="">
-            </a>
+
+            <img src="{% static 'img/logo.png' %}" width="50px" height="50px" alt="">
         </div>
         <div>
             <ul class="nav navbar-nav" role="navigation">
+
                 <li>
-                    <a href="{%url 'blog:blog_title' %}">BLOG</a>
+                    <a href="{% url 'blog:blog_title' %}">BLOG</a>
+                </li>
+                <li>
+                    <a href="{% url 'article:article_titles' %}">文章</a>
                 </li>
             </ul>
             <ul class="nav navbar-nav navbar-right" style="margin-right:10px">
@@ -36,7 +39,7 @@
                     </li>
                     <li>
 
-                        <a href="{% url 'account:user_register' %}">Register</a>
+                        <a href="{% url 'account:user_register' %}">Sign up</a>
                     </li>
                 {%endif%}
             </ul>

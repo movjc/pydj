@@ -9,6 +9,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from .models import UserProfile, UserInfo
 from django.http import HttpResponseRedirect
+from django.core.urlresolvers import reverse
 
 def user_login(request):
     if request.method == "POST":
@@ -45,6 +46,7 @@ def register(request):
             new_profile.save()
             UserInfo.objects.create(user=new_user)
             # return HttpResponse("Successfully")
+            # return HttpResponseRedirect(reverse("account:user_login")) 注册成功后跳转到登录页面
             return render(request, "account/register_done.html")
 
         else:

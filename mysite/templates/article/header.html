@@ -2,18 +2,30 @@
 <div>
     <nav class="navbar navbar-default" role="navigation">
         <div class="navbar-header">
-            <a href="#" class="navbar-brand"><img src="{% static 'images/logo.png' %}" width="100px" alt="xxx"> </a>
+            <!--<a href="#" class="navbar-brand"> </a>-->
+            <img src="{% static 'images/logo.png' %}" width="50px"  height="50px" alt="xxx">
         </div>
+
         <div>
-            <ul class="nav navbar-nav" role="tablist">
-                <li><a href="{% url 'article:article_column' %}">文章管理</a></li>
-            </ul>
+            {% if user.is_authenticated%}
+                <ul class="nav navbar-nav" role="tablist">
+
+                        <li><a href="{% url 'article:article_column' %}">文章管理</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right" style="margin-right:10px">
+                    <li><a href="{% url 'blog:blog_title' %}">网站首页</a> </li>
+                    <li> <a>{{ user.username }}</a> </li>
+                    <li><a href="{% url 'article:article_column' %}">后台管理</a></li>
+                    <li><a href="{% url 'account:user_logout' %}">Logout</a> </li>
+                </ul>
+            {% else %}
             <ul class="nav navbar-nav navbar-right" style="margin-right:10px">
-                <li><a href="{% url 'blog:blog_title' %}">网站首页</a> </li>
-                <li> <a>{{ user.username }}</a> </li>
-                <li><a href="{% url 'article:article_column' %}">后台管理</a></li>
-                <li><a href="{% url 'account:user_logout' %}">Logout</a> </li>
-            </ul>
+                    <li><a href="{% url 'blog:blog_title' %}">网站首页</a> </li>
+                    <li><a href="{% url 'account:user_login' %}">登录</a> </li>
+                </ul>
+            {% endif %}
         </div>
+
     </nav>
+
 </div>
